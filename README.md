@@ -53,6 +53,12 @@ Instead of “Resume-final-v7.docx”, you maintain one structured YAML file and
   - refactor the YAML over time (add experience, wins, certifications)
   - tighten bullets and keep the structure valid
 
+Tip: you can use an AI assistant as a true co-collaborator here—not just Q&A.
+
+- Ask it to propose safe changes to `CVFoundry-Lite-Jinja.j2` (layout) or `CVFoundry-Lite-Config.yml` (theme)
+- Apply small changes, rebuild, and iterate
+- Keep everything in git so you can review diffs and revert
+
 The build script validates and normalizes inputs to reduce template breakage.
 
 ## CLI options
@@ -79,6 +85,38 @@ You can:
 - host it so you have one “always up to date” URL (e.g., GitHub Pages / Netlify)
 
 If you publish publicly, consider removing phone/email or maintaining a “public” canonical variant.
+
+## Reset to a known-good baseline (golden copy)
+
+This repo includes an `original-setup/` folder containing a **golden copy** of the core files as shipped.
+
+Use this if you (or an AI assistant) accidentally break the build script, template, or config while experimenting.
+
+Important:
+
+- Resetting `CVFoundry-Lite-Canonical.yml` will overwrite your resume content.
+- Most of the time you only want to reset the build/template/config, and keep your canonical YAML.
+
+Typical safe reset (keep your resume content):
+
+```bash
+cp -f original-setup/CVFoundry-Lite-Build.py ./CVFoundry-Lite-Build.py
+cp -f original-setup/CVFoundry-Lite-Jinja.j2 ./CVFoundry-Lite-Jinja.j2
+cp -f original-setup/CVFoundry-Lite-Config.yml ./CVFoundry-Lite-Config.yml
+```
+
+Full reset (including sample canonical):
+
+```bash
+cp -f original-setup/CVFoundry-Lite-Canonical.yml ./CVFoundry-Lite-Canonical.yml
+```
+
+If you’re using git, the best reset mechanism is still:
+
+- `git status`
+- `git diff`
+- `git restore <file>`
+- `git checkout -- <file>` (older git)
 
 ## Troubleshooting
 

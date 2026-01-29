@@ -191,3 +191,30 @@ If you publish publicly:
 - **Template error mentions `items`**
   - In Jinja, dict keys like `items` can collide with method names. CVFoundry-Lite’s template already avoids this by using bracket access.
 
+## 10) Resetting to a known-good baseline (original-setup)
+
+This repo includes an `original-setup/` folder containing a **golden copy** of the core CVFoundry-Lite files as shipped.
+
+Use it if you (or an AI assistant) experiment with layout/theme/build logic and accidentally break something.
+
+Important:
+
+- Resetting `CVFoundry-Lite-Canonical.yml` will overwrite your resume content.
+- Most resets should keep your canonical YAML and only restore the build/template/config.
+
+Typical safe reset (keep your resume content):
+
+```bash
+cp -f original-setup/CVFoundry-Lite-Build.py ./CVFoundry-Lite-Build.py
+cp -f original-setup/CVFoundry-Lite-Jinja.j2 ./CVFoundry-Lite-Jinja.j2
+cp -f original-setup/CVFoundry-Lite-Config.yml ./CVFoundry-Lite-Config.yml
+```
+
+If you want to start over completely (including the sample canonical file):
+
+```bash
+cp -f original-setup/CVFoundry-Lite-Canonical.yml ./CVFoundry-Lite-Canonical.yml
+```
+
+If you’re using git, prefer git as your reset mechanism (review diffs; revert individual files).
+
