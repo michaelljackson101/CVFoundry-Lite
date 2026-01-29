@@ -75,6 +75,22 @@ Tip: you can use an AI assistant as a true co-collaborator here—not just Q&A.
 
 The build script validates and normalizes inputs to reduce template breakage.
 
+## Templates: create multiple resume layouts (Jinja)
+
+`CVFoundry-Lite-Jinja.j2` is the resume layout. You can make alternate outputs by creating additional templates (for example: short resume, 1-page, landscape) while keeping the same `CVFoundry-Lite-Canonical.yml`.
+
+Example:
+
+```bash
+bash build.sh --template CVFoundry-Lite-Jinja-1page.j2 --output "CVFoundry-Lite-1page.html"
+```
+
+## Tools like Windsurf
+
+AI-enabled editors can be especially helpful for safe refactors across YAML + Jinja + Python. One example is Windsurf:
+
+- https://windsurf.ai/
+
 ## CLI options
 
 ```bash

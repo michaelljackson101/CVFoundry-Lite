@@ -113,6 +113,8 @@ sequenceDiagram
   participant You
   participant AI as AI Assistant
   participant Y as Canonical.yml
+  participant C as Config.yml
+  participant T as Jinja.j2
   participant B as Build.py
   participant H as HTML
 
@@ -120,8 +122,36 @@ sequenceDiagram
   You->>AI: "Refactor this YAML: tighten bullets, dedupe, keep schema"
   AI-->>Y: Cleaner Canonical.yml (same structure)
   You->>B: Run build
+  B->>C: Load theme + toggles
+  B->>T: Load template
   B-->>H: Updated self-contained HTML
 ```
+
+### Jinja templates (why this is powerful)
+
+`CVFoundry-Lite-Jinja.j2` is the “layout engine.” The same Canonical.yml can produce different outputs by swapping templates.
+
+Examples you can build with AI assistance:
+
+- **Short resume**: fewer sections, tighter spacing
+- **1-page**: more aggressive condensation of bullets
+- **Landscape**: different grid and header layout
+
+Practical pattern:
+
+- Copy the template: `CVFoundry-Lite-Jinja.j2` → `CVFoundry-Lite-Jinja-1page.j2`
+- Iterate on the copy (small diffs, rebuild often)
+- Build using the `--template` flag:
+
+```bash
+bash build.sh --template CVFoundry-Lite-Jinja-1page.j2 --output "CVFoundry-Lite-1page.html"
+```
+
+### Tools like Windsurf
+
+Emerging IDE-native AI tools make this workflow much easier (small refactors, safe diffs, fast iteration). One example is Windsurf:
+
+- https://windsurf.ai/
 
 ### Refactor prompt (copy/paste)
 
