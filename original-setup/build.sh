@@ -4,13 +4,22 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VENV_DIR="$ROOT_DIR/.venv"
 
-if [ ! -d "$VENV_DIR" ]; then
-  echo "Virtualenv not found at $VENV_DIR" >&2
-  echo "Run: bash bootstrap.sh" >&2
-  exit 1
+if [ -f "$VENV_DIR/bin/activate" ]; then
+  # shellcheck disable=SC1091
+  source "$VENV_DIR/bin/activate"
+  python "$ROOT_DIR/CVFoundry-Lite-Build.py" "$@"
+  exit 0
 fi
 
-# shellcheck disable=SC1091
-source "$VENV_DIR/bin/activate"
+if command -v python >/dev/null 2>&1; then
+  python "$ROOT_DIR/CVFoundry-Lite-Build.py" "$@"
+  exit 0
+fi
 
-python "$ROOT_DIR/CVFoundry-Lite-Build.py" "$@"
+if command -v python3 >/dev/null 2>&1; then
+  python3 "$ROOT_DIR/CVFoundry-Lite-Build.py" "$@"
+  exit 0
+fi
+
+echo "No python interpreter found (expected 'python' or 'python3' on PATH)." >&2
+exit 1
