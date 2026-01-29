@@ -13,7 +13,7 @@ Instead of keeping many “resume versions”, you keep one structured canonical
 
 ```mermaid
 flowchart TD
-  A[Old world: many Word/PDF files] -->|pain| B
+  A[Old world: many Word and PDF files] -->|pain| B
   B[New world: one YAML + build] --> C[Self-contained HTML]
   C --> D[Share privately or publish]
 
@@ -119,7 +119,7 @@ sequenceDiagram
   participant H as HTML
 
   You->>Y: Add raw notes (new role / win / cert)
-  You->>AI: "Refactor this YAML: tighten bullets, dedupe, keep schema"
+  You->>AI: Refactor YAML: tighten bullets, dedupe, keep schema
   AI-->>Y: Cleaner Canonical.yml (same structure)
   You->>B: Run build
   B->>C: Load theme + toggles
@@ -208,6 +208,42 @@ Common options:
 If you publish publicly:
 - Remove phone/email if you prefer.
 - Consider a “public” variant of canonical YAML with limited PII.
+
+## 9) Versions and upgrading safely
+
+CVFoundry-Lite includes:
+
+- `VERSION` (the tool version)
+- `CHANGELOG.md` (release history)
+
+The generated HTML footer includes the version so you can tell what created a given file.
+
+### Recommended upgrade approach (don’t lose your resume)
+
+Keep your personal resume in a gitignored file:
+
+- `CVFoundry-Lite-Canonical.local.yml`
+
+The build will automatically use it if present.
+
+One-time setup:
+
+```bash
+cp -n CVFoundry-Lite-Canonical.yml CVFoundry-Lite-Canonical.local.yml
+```
+
+From then on:
+
+- Edit `CVFoundry-Lite-Canonical.local.yml`
+- Upgrade the tool by pulling changes:
+
+```bash
+git pull
+bash bootstrap.sh
+bash build.sh
+```
+
+Your generated HTML files remain on disk unless you delete them; rebuilding creates a new HTML artifact.
 
 ## 9) Troubleshooting
 

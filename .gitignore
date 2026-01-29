@@ -6,6 +6,9 @@ __pycache__/
 # Generated resume outputs
 CVFoundry-Lite-*.html
 
+# Per-user canonical override (safe upgrades)
+CVFoundry-Lite-Canonical.local.yml
+
 # Internal planning / design docs (not required for end users)
 prd.yml
 architecture.yml

@@ -101,6 +101,47 @@ python CVFoundry-Lite-Build.py \
   --output "CVFoundry-Lite-John Doe.html"
 ```
 
+## Versions, releases, and upgrades
+
+This repo includes:
+
+- `VERSION` (the current CVFoundry-Lite version)
+- `CHANGELOG.md` (release history)
+
+The generated HTML footer includes the build version (from `VERSION`) so you can always see which release produced a file.
+
+### Recommended release management (for you, the maintainer)
+
+- Bump `VERSION`
+- Add an entry to `CHANGELOG.md`
+- Tag a release: `git tag v0.3.0` (and push tags)
+
+### Safe upgrade path (for friends/family)
+
+To upgrade the tool without losing resume edits, keep your personal resume content in a local-only file:
+
+- `CVFoundry-Lite-Canonical.local.yml` (this is gitignored)
+
+The build script will automatically prefer `CVFoundry-Lite-Canonical.local.yml` if it exists.
+
+Upgrade steps:
+
+1. One-time setup:
+
+```bash
+cp -n CVFoundry-Lite-Canonical.yml CVFoundry-Lite-Canonical.local.yml
+```
+
+2. Do your edits in `CVFoundry-Lite-Canonical.local.yml` going forward.
+
+3. When a new version is available:
+
+- `git pull`
+- `bash bootstrap.sh` (if dependencies changed)
+- `bash build.sh`
+
+Your generated HTML files won’t be overwritten unless you rebuild, and your canonical data stays in the gitignored local file.
+
 ## Sharing your resume
 
 The generated HTML is:

@@ -10,6 +10,7 @@ from jinja2 import Environment, FileSystemLoader
 
 
 DEFAULT_CANONICAL_PATH = "CVFoundry-Lite-Canonical.yml"
+DEFAULT_CANONICAL_LOCAL_PATH = "CVFoundry-Lite-Canonical.local.yml"
 DEFAULT_CONFIG_PATH = "CVFoundry-Lite-Config.yml"
 DEFAULT_TEMPLATE_NAME = "CVFoundry-Lite-Jinja.j2"
 
@@ -128,12 +129,26 @@ def _compute_content_hash(paths: list[Path]) -> str:
     return h.hexdigest()
 
 
+def _read_version(repo_root: Path) -> str:
+    p = repo_root / "VERSION"
+    if not p.exists():
+        return "0.0.0"
+    try:
+        v = p.read_text(encoding="utf-8").strip()
+    except Exception:
+        return "0.0.0"
+    return v if v else "0.0.0"
+
+
 def _build_meta(*, canonical_path: str, config_path: str, template_path: str) -> BuildMeta:
-    paths = [Path(canonical_path), Path(config_path), Path(template_path), Path(__file__)]
+    repo_root = Path(__file__).resolve().parent
+    version = _read_version(repo_root)
+
+    paths = [Path(canonical_path), Path(config_path), Path(template_path), repo_root / "VERSION", Path(__file__)]
     content_hash = _compute_content_hash([p for p in paths if p.exists()])
     return BuildMeta(
         product="cvfoundry-lite",
-        version="0.1.0",
+        version=version,
         date=datetime.now().strftime("%Y-%m-%d"),
         hash=content_hash,
     )
@@ -356,13 +371,16 @@ def _default_output_name(person_name: str) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--canonical", default=DEFAULT_CANONICAL_PATH)
+    parser.add_argument("--canonical", default=None)
     parser.add_argument("--config", default=DEFAULT_CONFIG_PATH)
     parser.add_argument("--template", default=DEFAULT_TEMPLATE_NAME)
     parser.add_argument("--output", default=None)
     args = parser.parse_args()
 
-    canonical_path = str(args.canonical)
+    canonical_path = str(args.canonical) if args.canonical else DEFAULT_CANONICAL_PATH
+    if args.canonical is None and Path(DEFAULT_CANONICAL_LOCAL_PATH).exists():
+        canonical_path = DEFAULT_CANONICAL_LOCAL_PATH
+
     config_path = str(args.config)
     template_path = str(args.template)
 
