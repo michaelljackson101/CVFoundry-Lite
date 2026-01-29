@@ -1,0 +1,33 @@
+meta:
+  schema_version: 1
+
+theme:
+  fonts:
+    body: "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, Liberation Sans, sans-serif"
+    mono: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace"
+  colors:
+    background: "#ffffff"
+    text: "#0f172a"
+    muted: "#475569"
+    subtle: "#94a3b8"
+    border: "#e2e8f0"
+    primary: "#2563eb"
+  density:
+    line_height: 1.25
+    section_gap_px: 14
+    item_gap_px: 8
+
+layout:
+  page_width_px: 900
+  left_column_width_pct: 34
+  show_footer_build_info: false
+
+formatting:
+  date_format: "mmm yyyy"
+
+features:
+  show_summary: true
+  show_projects: true
+  show_certifications: true
+  show_interests: true
+  show_skill_categories: true

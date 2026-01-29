@@ -1,0 +1,81 @@
+meta:
+  schema_version: 1
+  generated_for: "CVFoundry-Lite MVP starter"
+
+personal:
+  name: "John Doe"
+  headline: "AI Product & Delivery Leader"
+  location: "Boston, MA"
+  email: "john.doe@example.com"
+  phone: "+1 (555) 010-0200"
+  links:
+    - label: "LinkedIn"
+      url: "https://www.linkedin.com/in/johndoe"
+    - label: "GitHub"
+      url: "https://github.com/johndoe"
+    - label: "Portfolio"
+      url: "https://johndoe.dev"
+
+summary:
+  - "Builds practical AI products with disciplined delivery, governance, and measurable outcomes."
+  - "Leads cross-functional teams across product, engineering, design, and security to ship reliable systems."
+  - "Known for crisp communication, stakeholder trust, and turning ambiguity into execution."
+
+skills:
+  - category: "AI/ML"
+    items: ["LLM application design", "Prompting & evaluation", "RAG basics", "Model risk awareness"]
+  - category: "Product"
+    items: ["Discovery", "Roadmaps", "Metrics", "Stakeholder management", "Narrative writing"]
+  - category: "Engineering"
+    items: ["Python", "TypeScript", "APIs", "CI/CD", "Observability"]
+  - category: "Leadership"
+    items: ["Program delivery", "Operating models", "Governance", "Hiring & coaching"]
+
+experience:
+  - company: "Example Consulting"
+    location: "Boston, MA"
+    role: "Associate Director, AI Transformation"
+    start_date: "2022-06"
+    end_date: "Present"
+    highlights:
+      - "Delivered an AI enablement program across 500+ staff; achieved 60%+ adoption of approved AI workflows within 90 days."
+      - "Designed a human-in-the-loop operating model aligned to compliance and auditability; reduced review time by 35%."
+      - "Built a governed content-production pipeline (YAML-first + templates) that improved speed and consistency of executive materials."
+      - "Established outcome metrics and weekly delivery governance; improved predictability and stakeholder confidence."
+    tags: ["ai", "delivery", "governance"]
+
+  - company: "Acme Software"
+    location: "Remote"
+    role: "Senior Product Manager"
+    start_date: "2019-01"
+    end_date: "2022-05"
+    highlights:
+      - "Owned roadmap for a workflow automation platform; grew active users 3x and improved retention by 18%."
+      - "Partnered with engineering to ship a reliability initiative; reduced Sev-1 incidents by 45% in two quarters."
+      - "Introduced lightweight experimentation and success metrics; accelerated decision-making and cut rework."
+    tags: ["product", "platform"]
+
+projects:
+  - name: "CVFoundry-Lite"
+    role: "Creator"
+    link: ""
+    bullets:
+      - "Built a self-contained resume generator from canonical YAML + config YAML using Python + Jinja."
+      - "Prioritized portability, deterministic builds, and friendly validation errors for non-technical users."
+
+education:
+  - school: "State University"
+    degree: "B.S., Computer Science"
+    location: ""
+    start_date: "2012"
+    end_date: "2016"
+    details:
+      - "Graduated with honors"
+
+certifications:
+  - name: "AWS Certified Solutions Architect — Associate"
+    issuer: "Amazon Web Services"
+    date: "2021"
+
+extras:
+  interests: ["Writing", "Teaching", "Systems thinking"]

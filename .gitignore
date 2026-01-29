@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Generated resume outputs
+CVFoundry-Lite-*.html
+
+# Internal planning / design docs (not required for end users)
+prd.yml
+architecture.yml
+tasks.yml
+CVFoundry-Lite-prd.md
+CVFoundry-Lite-architecture.md
+CVFoundry-Lite-tasks.md
+
+# Editor/IDE
+.vscode/
+.idea/

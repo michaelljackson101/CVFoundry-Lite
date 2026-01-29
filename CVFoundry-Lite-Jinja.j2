@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ personal.name | e }} — Resume</title>
+  <style>
+    :root {
+      --bg: {{ theme.colors.background | e }};
+      --text: {{ theme.colors.text | e }};
+      --muted: {{ theme.colors.muted | e }};
+      --subtle: {{ theme.colors.subtle | e }};
+      --border: {{ theme.colors.border | e }};
+      --primary: {{ theme.colors.primary | e }};
+
+      --font-body: {{ theme.fonts.body | e }};
+      --font-mono: {{ theme.fonts.mono | e }};
+
+      --page-width: {{ layout.page_width_px }}px;
+      --lh: {{ theme.density.line_height }};
+      --section-gap: {{ theme.density.section_gap_px }}px;
+      --item-gap: {{ theme.density.item_gap_px }}px;
+      --left-col: {{ layout.left_column_width_pct }}%;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: var(--lh);
+    }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page {
+      max-width: var(--page-width);
+      margin: 28px auto;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .name {
+      font-size: 28px;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .headline {
+      margin: 0;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .contact .pill {
+      display: inline-flex;
+      gap: 6px;
+      align-items: baseline;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: var(--left-col) calc(100% - var(--left-col));
+      gap: 18px;
+    }
+
+    @media (max-width: 840px) {
+      .page { margin: 0; border-radius: 0; border-left: 0; border-right: 0; }
+      .main { grid-template-columns: 1fr; }
+    }
+
+    .section {
+      margin-bottom: var(--section-gap);
+    }
+
+    .section h2 {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin: 0 0 10px 0;
+    }
+
+    .bullets {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .item {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      display: grid;
+      gap: 6px;
+    }
+
+    .item .topline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .item .title {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .item .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .item .meta {
+      color: var(--muted);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      white-space: nowrap;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .tag {
+      font-size: 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px 8px;
+      color: var(--muted);
+      background: #fff;
+    }
+
+    .skill-cat {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .skill-cat .cat {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .skill-cat .items {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      color: var(--subtle);
+      font-size: 11px;
+      font-family: var(--font-mono);
+    }
+
+    @media print {
+      .page { border: 0; margin: 0; padding: 0; }
+      a { color: var(--text); text-decoration: none; }
+      .contact .pill, .item, .tag { border-color: #ddd; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div>
+        <h1 class="name">{{ personal.name | e }}</h1>
+        {% if personal.headline %}
+          <p class="headline">{{ personal.headline | e }}</p>
+        {% endif %}
+      </div>
+
+      <div class="contact">
+        {% if personal.location %}
+          <span class="pill"><span>Location</span><span>{{ personal.location | e }}</span></span>
+        {% endif %}
+        {% if personal.email %}
+          <span class="pill"><span>Email</span><span>{{ personal.email | e }}</span></span>
+        {% endif %}
+        {% if personal.phone %}
+          <span class="pill"><span>Phone</span><span>{{ personal.phone | e }}</span></span>
+        {% endif %}
+        {% for link in personal.links %}
+          {% if link.label and link.url %}
+            <span class="pill"><span>{{ link.label | e }}</span><span><a href="{{ link.url | e }}">{{ link.url | e }}</a></span></span>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </header>
+
+    <div class="main">
+      <aside>
+        {% if features.show_summary and summary %}
+          <section class="section">
+            <h2>Summary</h2>
+            <ul class="bullets">
+              {% for b in summary %}
+                <li>{{ b | e }}</li>
+              {% endfor %}
+            </ul>
+          </section>
+        {% endif %}
+
+        {% if skills and (features.show_skill_categories or (skills | length > 0)) %}
+          <section class="section">
+            <h2>Skills</h2>
+            {% for s in skills %}
+              {% if s.category and s.items %}
+                <div class="skill-cat">
+                  <div class="cat">{{ s.category | e }}</div>
+                  <div class="items">{{ s["items"] | join(", ") | e }}</div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </section>
+        {% endif %}
+
+        {% if education %}
+          <section class="section">
+            <h2>Education</h2>
+            {% for e in education %}
+              <div class="item">
+                <div class="topline">
+                  <div>
+                    <div class="title">{{ e.school | e }}</div>
+                    <div class="subtitle">{{ e.degree | e }}</div>
+                  </div>
+                  <div class="meta">
+                    {{ e.start_date | fmt_date(date_format) }}{% if e.start_date and (e.end_date or "") %} — {% endif %}{{ e.end_date | fmt_date(date_format) }}
+                  </div>
+                </div>
+                {% if e.details %}
+                  <ul class="bullets">
+                    {% for d in e.details %}
+                      <li>{{ d | e }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </section>
+        {% endif %}
+
+        {% if features.show_certifications and certifications %}
+          <section class="section">
+            <h2>Certifications</h2>
+            {% for c in certifications %}
+              <div class="item">
+                <div class="topline">
+                  <div>
+                    <div class="title">{{ c.name | e }}</div>
+                    <div class="subtitle">{{ c.issuer | e }}</div>
+                  </div>
+                  <div class="meta">{{ c.date | fmt_date("yyyy") }}</div>
+                </div>
+              </div>
+            {% endfor %}
+          </section>
+        {% endif %}
+
+        {% if features.show_interests and extras and extras.interests %}
+          <section class="section">
+            <h2>Interests</h2>
+            <div class="item">
+              <div class="subtitle">{{ extras.interests | join(" · ") | e }}</div>
+            </div>
+          </section>
+        {% endif %}
+      </aside>
+
+      <main>
+        {% if experience %}
+          <section class="section">
+            <h2>Experience</h2>
+            {% for r in experience %}
+              <div class="item">
+                <div class="topline">
+                  <div>
+                    <div class="title">{{ r.role | e }}</div>
+                    <div class="subtitle">{{ r.company | e }}{% if r.location %} — {{ r.location | e }}{% endif %}</div>
+                  </div>
+                  <div class="meta">
+                    {{ r.start_date | fmt_date(date_format) }}{% if r.start_date and (r.end_date or "") %} — {% endif %}{{ r.end_date | fmt_date(date_format) }}
+                  </div>
+                </div>
+
+                {% if r.highlights %}
+                  <ul class="bullets">
+                    {% for h in r.highlights %}
+                      <li>{{ h | e }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                {% if r.tags %}
+                  <div class="tags">
+                    {% for t in r.tags %}
+                      <span class="tag">{{ t | e }}</span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </section>
+        {% endif %}
+
+        {% if features.show_projects and projects %}
+          <section class="section">
+            <h2>Projects</h2>
+            {% for p in projects %}
+              <div class="item">
+                <div class="topline">
+                  <div>
+                    <div class="title">
+                      {% if p.link %}
+                        <a href="{{ p.link | e }}">{{ p.name | e }}</a>
+                      {% else %}
+                        {{ p.name | e }}
+                      {% endif %}
+                    </div>
+                    {% if p.role %}
+                      <div class="subtitle">{{ p.role | e }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                {% if p.bullets %}
+                  <ul class="bullets">
+                    {% for b in p.bullets %}
+                      <li>{{ b | e }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </section>
+        {% endif %}
+      </main>
+    </div>
+
+    {% if layout.show_footer_build_info and build_meta %}
+      <div class="footer">
+        build={{ build_meta.product }}@{{ build_meta.version }} | date={{ build_meta.date }} | hash={{ build_meta.hash_short }}
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- CVFoundry-Lite: self-contained HTML; no external assets required -->
+</body>
+</html>
