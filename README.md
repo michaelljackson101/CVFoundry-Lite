@@ -41,6 +41,12 @@ source .venv/bin/activate
 ### 2) Build your resume
 
 ```bash
+bash build.sh
+```
+
+Or (manual):
+
+```bash
 python CVFoundry-Lite-Build.py
 ```
 
