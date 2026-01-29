@@ -1,6 +1,9 @@
 meta:
   schema_version: 1
   generated_for: "CVFoundry-Lite MVP starter"
+  creator:
+    name: "Michael (michaelljackson101)"
+    github: "https://github.com/michaelljackson101"
 
 personal:
   name: "John Doe"
@@ -12,7 +15,7 @@ personal:
     - label: "LinkedIn"
       url: "https://www.linkedin.com/in/johndoe"
     - label: "GitHub"
-      url: "https://github.com/johndoe"
+      url: "https://github.com/michaelljackson101"
     - label: "Portfolio"
       url: "https://johndoe.dev"
 

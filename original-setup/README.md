@@ -4,6 +4,14 @@ This folder contains a **golden copy** of the core CVFoundry-Lite files as origi
 
 It exists for one reason: if you (or an AI assistant) accidentally break your working files while experimenting, you can restore the project to a known-good baseline by copying files from here back to the repo root.
 
+## Credit / gratitude (optional)
+
+If you find this useful, a simple “thanks” is always appreciated:
+
+- GitHub: https://github.com/michaelljackson101
+
+If you think it would help someone else, please consider sharing it with a few friends/colleagues who might benefit.
+
 ## What’s in here
 
 - `CVFoundry-Lite-Build.py`

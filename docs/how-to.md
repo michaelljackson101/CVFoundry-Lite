@@ -13,22 +13,15 @@ Instead of keeping many “resume versions”, you keep one structured canonical
 
 ```mermaid
 flowchart TD
-  A[Old world:
-Word/PDF versions
-"Resume-final-final".docx] -->|pain| B
-  B[New world:
-Canonical YAML
-+ Build script] --> C[Self-contained HTML]
+  A[Old world: many Word/PDF files] -->|pain| B
+  B[New world: one YAML + build] --> C[Self-contained HTML]
   C --> D[Share privately or publish]
 
   subgraph CVFoundry-Lite
-    E[CVFoundry-Lite-Canonical.yml
-Your CV data] --> G[CVFoundry-Lite-Build.py]
-    F[CVFoundry-Lite-Config.yml
-Theme + toggles] --> G
-    H[CVFoundry-Lite-Jinja.j2
-Template] --> G
-    G --> I[CVFoundry-Lite-<Name>.html]
+    E[Canonical.yml - your data] --> G[Build.py]
+    F[Config.yml - theme] --> G
+    H[Jinja.j2 - template] --> G
+    G --> I[Output: CVFoundry-Lite-NAME.html]
   end
 
   B --> E

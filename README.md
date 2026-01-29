@@ -8,6 +8,14 @@ CVFoundry-Lite is a tiny, local-first resume generator designed for a modern wor
 
 It’s aimed at friends/family who want a better system than manually editing and archiving Word/PDF variants.
 
+## Credit / gratitude (optional)
+
+If you find this useful, a simple “thanks” is always appreciated:
+
+- GitHub: https://github.com/michaelljackson101
+
+If you think it would help someone else, please consider sharing it with a few friends/colleagues who might benefit.
+
 ## How to use this repo
 
 Start here:
