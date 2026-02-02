@@ -4,6 +4,18 @@ All notable changes to CVFoundry-Lite will be documented in this file.
 
 The format is based on Keep a Changelog, and versions follow SemVer.
 
+## [0.3.2] - 2026-02-01
+
+### Changed
+
+- Version bump.
+
+## [0.3.1] - 2026-02-01
+
+### Changed
+
+- Version bump.
+
 ## [0.3.0] - 2026-01-29
 
 ### Added

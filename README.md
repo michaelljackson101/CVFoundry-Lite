@@ -114,7 +114,7 @@ The generated HTML footer includes the build version (from `VERSION`) so you can
 
 - Bump `VERSION`
 - Add an entry to `CHANGELOG.md`
-- Tag a release: `git tag v0.3.0` (and push tags)
+- Tag a release: `git tag v0.3.2` (and push tags)
 
 ### Safe upgrade path (for friends/family)
 
@@ -197,3 +197,38 @@ If you’re using git, the best reset mechanism is still:
 - **YAML errors**
   - If the build fails, read the error message (it includes the missing field or parsing issue).
 
+
+<br>
+
+<div align="center">
+
+
+
+---
+
+<div align="center">
+
+<!-- appreciation-footer-start -->
+
+### 🤝 Share the Knowledge
+
+*Found this useful?*
+A **Star** on [GitHub](https://github.com/michaelljackson101) helps others find it.
+If this saved you time, please share it with a friend or colleague who might benefit.
+
+<!-- appreciation-footer-end -->
+
+</div>
+
+<!-- brand-footer-start -->
+
+---
+
+**Michael L. Jackson**
+[Website](https://michaelljackson101.github.io/Share/index.html) • [GitHub](https://github.com/michaelljackson101) • [LinkedIn](https://www.linkedin.com/in/michaelljackson/)
+
+*Building systems that think.*
+
+<!-- brand-footer-end -->
+
+</div>

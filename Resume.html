@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>John Doe — Resume</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --subtle: #94a3b8;
+      --border: #e2e8f0;
+      --primary: #A100FF;
+
+      --font-body: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, Liberation Sans, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;
+
+      --page-width: 900px;
+      --lh: 1.25;
+      --section-gap: 14px;
+      --item-gap: 8px;
+      --left-col: 34%;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: var(--lh);
+    }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page {
+      max-width: var(--page-width);
+      margin: 28px auto;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--primary);
+      margin-bottom: 18px;
+    }
+
+    .name {
+      font-size: 28px;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .headline {
+      margin: 0;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .contact .pill {
+      display: inline-flex;
+      gap: 6px;
+      align-items: baseline;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+    }
+
+    @media (max-width: 840px) {
+      .page { margin: 0; border-radius: 0; border-left: 0; border-right: 0; }
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .overview .span-2 {
+      grid-column: span 2;
+    }
+
+    .overview .span-3 {
+      grid-column: span 3;
+    }
+
+    @media (max-width: 840px) {
+      .overview {
+        grid-template-columns: 1fr;
+      }
+      .overview .span-2,
+      .overview .span-3 {
+        grid-column: auto;
+      }
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .section {
+      margin-bottom: var(--section-gap);
+    }
+
+    .section h2 {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin: 0 0 10px 0;
+      padding-left: 10px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .bullets {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .item {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      display: grid;
+      gap: 6px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .item .topline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .item .title {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .item .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .item .meta {
+      color: var(--muted);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      white-space: nowrap;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .tag {
+      font-size: 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px 8px;
+      color: var(--muted);
+      background: #fff;
+    }
+
+    .skill-cat {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .skill-cat .cat {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .skill-cat .items {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      color: var(--subtle);
+      font-size: 11px;
+      font-family: var(--font-mono);
+    }
+
+    @media print {
+      .page { border: 0; margin: 0; padding: 0; }
+      a { color: var(--text); text-decoration: none; }
+      .contact .pill, .item, .tag { border-color: #ddd; }
+
+      .footer {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 10px 0;
+        margin: 0;
+        border-top: 1px solid #ddd;
+        background: #fff;
+      }
+
+      body {
+        padding-bottom: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div>
+        <h1 class="name">John Doe</h1>
+        
+          <p class="headline">AI/LLM Delivery &amp; Governance Leader</p>
+        
+      </div>
+
+      <div class="contact">
+        
+          <span class="pill"><span>Location</span><span>Boston, MA</span></span>
+        
+        
+          <span class="pill"><span>Email</span><span>john.doe@example.com</span></span>
+        
+        
+          <span class="pill"><span>Phone</span><span>+1 (555) 010-0200</span></span>
+        
+        
+          
+            <span class="pill"><span>LinkedIn</span><span><a href="https://www.linkedin.com/in/johndoe">https://www.linkedin.com/in/johndoe</a></span></span>
+          
+        
+          
+            <span class="pill"><span>GitHub</span><span><a href="https://github.com/michaelljackson101">https://github.com/michaelljackson101</a></span></span>
+          
+        
+          
+            <span class="pill"><span>Portfolio</span><span><a href="https://johndoe.dev">https://johndoe.dev</a></span></span>
+          
+        
+      </div>
+    </header>
+
+    <div class="overview">
+      
+        <section class="section span-3">
+          <h2>Summary</h2>
+          <div class="item">
+            <ul class="bullets">
+              
+                <li>Delivery leader focused on turning AI/LLM capability into auditable, repeatable outcomes through governance, operating models, and disciplined execution.</li>
+              
+                <li>Builds Human-in-the-Loop workflows with traceability so teams can move fast without losing trust, control, or accountability.</li>
+              
+                <li>Brings a practical “tooling + habits + metrics” approach to adoption (from pilots to scaled enablement), with measurable cycle-time improvements.</li>
+              
+            </ul>
+          </div>
+        </section>
+      
+
+      
+        <section class="section span-3">
+          <h2>Skills</h2>
+          <div class="item">
+            
+              
+                <div class="skill-cat">
+                  <div class="cat">AI/ML</div>
+                  <div class="items">LLM workflow design, Prompting &amp; evaluation, Human-in-the-loop patterns, Model risk awareness, NIST AI RMF literacy</div>
+                </div>
+              
+            
+              
+                <div class="skill-cat">
+                  <div class="cat">Product</div>
+                  <div class="items">Narrative writing, Decision-grade synthesis, Stakeholder alignment, Metrics, Executive packaging</div>
+                </div>
+              
+            
+              
+                <div class="skill-cat">
+                  <div class="cat">Engineering</div>
+                  <div class="items">Python, YAML-first authoring, Jinja templating, CLI tooling, Git workflows, Markdown-first artifacts</div>
+                </div>
+              
+            
+              
+                <div class="skill-cat">
+                  <div class="cat">Leadership</div>
+                  <div class="items">Program governance, Operating model design, Change enablement, Delivery discipline, Risk/compliance communication</div>
+                </div>
+              
+            
+          </div>
+        </section>
+      
+
+      
+        <section class="section">
+          <h2>Education</h2>
+          
+            <div class="item">
+              <div class="topline">
+                <div>
+                  <div class="title">State University</div>
+                  <div class="subtitle">B.S., Computer Science</div>
+                </div>
+                <div class="meta">
+                  Jan 2012 — Jan 2016
+                </div>
+              </div>
+              
+                <ul class="bullets">
+                  
+                    <li>Graduated with honors</li>
+                  
+                </ul>
+              
+            </div>
+          
+        </section>
+      
+
+      
+        <section class="section">
+          <h2>Certifications</h2>
+          
+            <div class="item">
+              <div class="topline">
+                <div>
+                  <div class="title">Certified Delivery Professional</div>
+                  <div class="subtitle">Professional Services Training</div>
+                </div>
+                <div class="meta">2025</div>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="topline">
+                <div>
+                  <div class="title">Cloud Architecture (Associate)</div>
+                  <div class="subtitle">Cloud Provider</div>
+                </div>
+                <div class="meta">2021</div>
+              </div>
+            </div>
+          
+        </section>
+      
+
+      
+        <section class="section">
+          <h2>Interests</h2>
+          <div class="item">
+            <div class="subtitle">Writing · Teaching · Systems thinking · AI literacy enablement</div>
+          </div>
+        </section>
+      
+    </div>
+
+    <div class="content">
+      
+        <section class="section">
+          <h2>Experience</h2>
+          
+            <div class="item">
+              <div class="topline">
+                <div>
+                  <div class="title">AI Transformation &amp; Governance Lead</div>
+                  <div class="subtitle">Global Consulting Firm — Boston, MA</div>
+                </div>
+                <div class="meta">
+                  Oct 2025 — Present
+                </div>
+              </div>
+
+              
+                <ul class="bullets">
+                  
+                    <li>Authored an AI strategic plan with a Crawl–Walk–Run maturity model aligned to NIST AI RMF and practical delivery constraints.</li>
+                  
+                    <li>Designed a TRACE-style methodology and TILETS learning loop for governed, auditable AI-assisted content production; achieved &gt;60% workforce enablement and built an internal champion network.</li>
+                  
+                    <li>Delivered 15+ AI assistants and reusable workflows; reduced manual reporting time ~40% and accelerated test design cycles ~30%.</li>
+                  
+                    <li>Enabled rapid executive-ready packaging of complex workstreams by separating deterministic artifact generation from final narrative framing.</li>
+                  
+                    <li>Built lightweight CLI automation and folder contracts so outputs were traceable, reproducible, and safe to reuse.</li>
+                  
+                </ul>
+              
+
+              
+                <div class="tags">
+                  
+                    <span class="tag">ai</span>
+                  
+                    <span class="tag">governance</span>
+                  
+                    <span class="tag">human-in-the-loop</span>
+                  
+                    <span class="tag">traceability</span>
+                  
+                    <span class="tag">windsurf</span>
+                  
+                </div>
+              
+            </div>
+          
+            <div class="item">
+              <div class="topline">
+                <div>
+                  <div class="title">Builder — Intent-to-Artifact Workflows</div>
+                  <div class="subtitle">Self-Directed (Open Work) — Remote</div>
+                </div>
+                <div class="meta">
+                  Oct 2025 — Present
+                </div>
+              </div>
+
+              
+                <ul class="bullets">
+                  
+                    <li>Designed and implemented an “Intent Foundry” approach: staged human–AI collaboration that turns ambiguous intent into tempered, traceable, execution-ready artifacts.</li>
+                  
+                    <li>Added recasting (forward intent→outputs and reverse outputs→evidence→inferred intent) to enable validation, auditability, and alternate stakeholder perspectives.</li>
+                  
+                    <li>Standardized run packaging so any run can be re-issued as a single executive-ready document driven by run-scoped YAML specifications.</li>
+                  
+                    <li>Practiced a tool-neutral AI co-collaboration model (e.g., Windsurf/Cascade) focused on durable artifacts, not chat transcripts.</li>
+                  
+                </ul>
+              
+
+              
+                <div class="tags">
+                  
+                    <span class="tag">intent</span>
+                  
+                    <span class="tag">trace</span>
+                  
+                    <span class="tag">yaml</span>
+                  
+                    <span class="tag">governed-ai</span>
+                  
+                    <span class="tag">windsurf</span>
+                  
+                </div>
+              
+            </div>
+          
+            <div class="item">
+              <div class="topline">
+                <div>
+                  <div class="title">Senior Product Manager</div>
+                  <div class="subtitle">Acme Software — Remote</div>
+                </div>
+                <div class="meta">
+                  Jan 2019 — May 2022
+                </div>
+              </div>
+
+              
+                <ul class="bullets">
+                  
+                    <li>Owned roadmap for a workflow automation platform; grew active users 3x and improved retention by 18%.</li>
+                  
+                    <li>Partnered with engineering to ship a reliability initiative; reduced Sev-1 incidents by 45% in two quarters.</li>
+                  
+                    <li>Introduced lightweight experimentation and success metrics; accelerated decision-making and cut rework.</li>
+                  
+                </ul>
+              
+
+              
+                <div class="tags">
+                  
+                    <span class="tag">product</span>
+                  
+                    <span class="tag">platform</span>
+                  
+                </div>
+              
+            </div>
+          
+        </section>
+      
+
+      
+        <section class="section">
+          <h2>Projects</h2>
+          
+            <div class="item">
+              <div class="topline">
+                <div>
+                  <div class="title">
+                    
+                      CVFoundry-Lite
+                    
+                  </div>
+                  
+                    <div class="subtitle">Creator</div>
+                  
+                </div>
+              </div>
+              
+                <ul class="bullets">
+                  
+                    <li>Built a self-contained resume generator from canonical YAML + config YAML using Python + Jinja, optimized for portability (single HTML file).</li>
+                  
+                    <li>Added validation + normalization so non-technical users can safely evolve a “CV source of truth” without template breakage.</li>
+                  
+                    <li>Included build metadata (date/version/hash) to make outputs traceable and reproducible.</li>
+                  
+                </ul>
+              
+            </div>
+          
+            <div class="item">
+              <div class="topline">
+                <div>
+                  <div class="title">
+                    
+                      CVFoundry (Concept)
+                    
+                  </div>
+                  
+                    <div class="subtitle">Designer</div>
+                  
+                </div>
+              </div>
+              
+                <ul class="bullets">
+                  
+                    <li>Developed a pragmatic approach to “CV as code”: structured data + templates + deterministic builds instead of manual Word/PDF version sprawl.</li>
+                  
+                    <li>Used AI as a co-collaborator for refactors, not just drafting—keeping the canonical CV clean over time.</li>
+                  
+                </ul>
+              
+            </div>
+          
+            <div class="item">
+              <div class="topline">
+                <div>
+                  <div class="title">
+                    
+                      KOS / TRACE (Concept)
+                    
+                  </div>
+                  
+                    <div class="subtitle">Author</div>
+                  
+                </div>
+              </div>
+              
+                <ul class="bullets">
+                  
+                    <li>Explored a tool-neutral control-plane for Human–AI co-collaboration where thinking becomes durable artifacts.</li>
+                  
+                    <li>Applied traceability and human-in-the-loop endorsement to improve trust in AI-assisted knowledge work.</li>
+                  
+                </ul>
+              
+            </div>
+          
+            <div class="item">
+              <div class="topline">
+                <div>
+                  <div class="title">
+                    
+                      ResDoc Template + Shared Engines
+                    
+                  </div>
+                  
+                    <div class="subtitle">Maintainer</div>
+                  
+                </div>
+              </div>
+              
+                <ul class="bullets">
+                  
+                    <li>Created a Markdown-first, Git-friendly scaffold for AI-assisted research and decision-support deliverables (TRACE loop + TILETS staging).</li>
+                  
+                    <li>Promoted simple conventions (one artifact per run, deterministic naming) to improve reuse, governance, and team adoption.</li>
+                  
+                </ul>
+              
+            </div>
+          
+        </section>
+      
+    </div>
+
+    
+      <div class="footer">
+        CVFoundry-Lite | 2026-01-31 | v0.3.1 | 3dd7362e37
+      </div>
+    
+  </div>
+
+  <!-- CVFoundry-Lite: self-contained HTML; no external assets required -->
+</body>
+</html>

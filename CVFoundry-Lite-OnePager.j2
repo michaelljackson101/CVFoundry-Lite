@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ personal.name }} — 1-Pager</title>
+  <style>
+    @page { size: 16in 9in; margin: 0.45in; }
+
+    :root {
+      --accent: {{ theme.colors.primary or "#1f4fd8" }};
+      --text: {{ theme.colors.text or "#111827" }};
+      --muted: {{ theme.colors.muted or "#4b5563" }};
+      --rule: {{ theme.colors.border or "#e5e7eb" }};
+    }
+
+    body {
+      font-family: {{ theme.fonts.body }};
+      color: var(--text);
+      margin: 0;
+    }
+
+    h1, h2, h3 { margin: 0; }
+
+    .page {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 0.6rem;
+      padding: 0.15in 0.25in;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .header-left {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 0.6rem;
+    }
+
+    .name {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.05;
+    }
+
+    .headline {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 0.15rem;
+    }
+
+    .meta {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: right;
+      line-height: 1.35;
+    }
+
+    .meta a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .summary {
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.25;
+      margin: 0.25rem 0 0.45rem 0;
+    }
+
+    .top {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 0.7rem;
+    }
+
+    .card {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 0.55rem 0.6rem;
+    }
+
+    .card.accented {
+      border-top: 3px solid var(--accent);
+    }
+
+    .card h3 {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1rem;
+    }
+
+    li {
+      font-size: 12px;
+      line-height: 1.25;
+      margin: 0.15rem 0;
+    }
+
+    .strengths {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.45rem 0.7rem;
+    }
+
+    .bucket-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.15rem;
+    }
+
+    .bucket-items {
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.25;
+    }
+
+    .wins {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .wins td {
+      border-top: 1px solid var(--rule);
+      padding: 0.35rem 0;
+      vertical-align: top;
+    }
+
+    .wins tr:first-child td { border-top: none; }
+
+    .win-title {
+      font-size: 12px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .win-impact {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin: 0.1rem 0 0 0;
+      line-height: 1.25;
+    }
+
+    .exp-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      --exp-col-role: 25%;
+      --exp-col-client: 22%;
+      --exp-col-dates: 8%;
+      --exp-col-impact: 45%;
+    }
+
+    .exp-table col.col-role { width: var(--exp-col-role); }
+    .exp-table col.col-client { width: var(--exp-col-client); }
+    .exp-table col.col-dates { width: var(--exp-col-dates); }
+    .exp-table col.col-impact { width: var(--exp-col-impact); }
+
+    .exp-table th {
+      text-align: left;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 0 0 0.25rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .exp-table td {
+      font-size: 11.5px;
+      padding: 0.3rem 0;
+      vertical-align: top;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .role {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .client {
+      color: var(--muted);
+    }
+
+    .dates {
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .impact {
+      color: var(--text);
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.7rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 0.35rem;
+    }
+
+    .footer .label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-weight: 800;
+      margin-bottom: 0.15rem;
+    }
+
+    .footer .value {
+      font-size: 11.5px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .build-footer {
+      position: fixed;
+      right: 0.45in;
+      bottom: 0.2in;
+      font-size: 10px;
+      color: var(--muted);
+      text-align: right;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.05rem 0.25rem;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <div>
+        <div class="name">{{ personal.name }}</div>
+        <div class="headline">{{ personal.headline }}</div>
+      </div>
+    </div>
+    <div class="meta">
+      <div>{{ personal.location }}</div>
+      {% if personal.email %}<div><a href="mailto:{{ personal.email }}">{{ personal.email }}</a></div>{% endif %}
+      {% if personal.phone %}<div><a href="tel:{{ personal.phone }}">{{ personal.phone }}</a></div>{% endif %}
+    </div>
+  </div>
+
+  <div class="top">
+    <div class="card accented">
+      <h3>Executive Summary</h3>
+      {% if summary %}
+      <div class="summary">
+          {% for s in summary[:1] %}
+          {{ s }}
+          {% endfor %}
+      </div>
+      {% endif %}
+
+      <div style="height: 0.45rem;"></div>
+
+      <h3>Core Strengths</h3>
+      <div class="strengths">
+        {% for s in skills %}
+        <div>
+          <div class="bucket-title">{{ s['category'] }}</div>
+          <div class="bucket-items">{{ s['items'] | join(", ") }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Mapping 'Projects' to 'Signature Proof' -->
+    <div class="card accented">
+      <h3>Signature Proof (Projects)</h3>
+      <table class="wins">
+        <tbody>
+          {% for p in projects[:4] %}
+          <tr>
+            <td>
+              <div class="win-title">{{ p.name }}</div>
+              {% if p.bullets %}
+              <div class="win-impact">{{ p.bullets[0] }}</div>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Selected Experience</h3>
+    <table class="exp-table">
+      <colgroup>
+        <col class="col-role" />
+        <col class="col-client" />
+        <col class="col-dates" />
+        <col class="col-impact" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Company</th>
+          <th>Dates</th>
+          <th>Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in experience[:5] %}
+        <tr>
+          <td>
+            <div class="role">{{ r.role }}</div>
+          </td>
+          <td class="client">
+            {{ r.company }}
+          </td>
+          <td class="dates">{{ r.start_date | fmt_date(date_format) }}–{{ r.end_date | fmt_date(date_format) }}</td>
+          <td class="impact">
+            {% if r.highlights %}
+            {{ r.highlights[0] }}
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <div>
+      <div class="label">Education</div>
+      <div class="value">
+        {% for e in education %}
+        <div>{{ e.school }} — {{ e.degree }}</div>
+        {% endfor %}
+      </div>
+    </div>
+    <div>
+      <div class="label">Certifications</div>
+      <div class="value">
+        {% for c in certifications %}
+        <div>{{ c.name }} — {{ c.issuer }} ({{ c.date }})</div>
+        {% endfor %}
+      </div>
+    </div>
+    <div>
+      <div class="label">Interests</div>
+      <div class="value">
+        {% for i in extras.interests %}
+        <div>{{ i }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="build-footer">{{ build_meta.product }} v{{ build_meta.version }} — {{ build_meta.date }} (rev {{ build_meta.hash_short }})</div>
+
+</body>
+</html>

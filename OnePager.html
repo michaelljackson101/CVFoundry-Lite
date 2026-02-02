@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>John Doe — 1-Pager</title>
+  <style>
+    @page { size: 16in 9in; margin: 0.45in; }
+
+    :root {
+      --accent: #A100FF;
+      --text: #0f172a;
+      --muted: #475569;
+      --rule: #e2e8f0;
+    }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, Liberation Sans, sans-serif;
+      color: var(--text);
+      margin: 0;
+    }
+
+    h1, h2, h3 { margin: 0; }
+
+    .page {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 0.6rem;
+      padding: 0.15in 0.25in;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .header-left {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 0.6rem;
+    }
+
+    .name {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.05;
+    }
+
+    .headline {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 0.15rem;
+    }
+
+    .meta {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: right;
+      line-height: 1.35;
+    }
+
+    .meta a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .summary {
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.25;
+      margin: 0.25rem 0 0.45rem 0;
+    }
+
+    .top {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 0.7rem;
+    }
+
+    .card {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 0.55rem 0.6rem;
+    }
+
+    .card.accented {
+      border-top: 3px solid var(--accent);
+    }
+
+    .card h3 {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1rem;
+    }
+
+    li {
+      font-size: 12px;
+      line-height: 1.25;
+      margin: 0.15rem 0;
+    }
+
+    .strengths {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.45rem 0.7rem;
+    }
+
+    .bucket-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.15rem;
+    }
+
+    .bucket-items {
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.25;
+    }
+
+    .wins {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .wins td {
+      border-top: 1px solid var(--rule);
+      padding: 0.35rem 0;
+      vertical-align: top;
+    }
+
+    .wins tr:first-child td { border-top: none; }
+
+    .win-title {
+      font-size: 12px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .win-impact {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin: 0.1rem 0 0 0;
+      line-height: 1.25;
+    }
+
+    .exp-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      --exp-col-role: 25%;
+      --exp-col-client: 22%;
+      --exp-col-dates: 8%;
+      --exp-col-impact: 45%;
+    }
+
+    .exp-table col.col-role { width: var(--exp-col-role); }
+    .exp-table col.col-client { width: var(--exp-col-client); }
+    .exp-table col.col-dates { width: var(--exp-col-dates); }
+    .exp-table col.col-impact { width: var(--exp-col-impact); }
+
+    .exp-table th {
+      text-align: left;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 0 0 0.25rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .exp-table td {
+      font-size: 11.5px;
+      padding: 0.3rem 0;
+      vertical-align: top;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .role {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .client {
+      color: var(--muted);
+    }
+
+    .dates {
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .impact {
+      color: var(--text);
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.7rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 0.35rem;
+    }
+
+    .footer .label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-weight: 800;
+      margin-bottom: 0.15rem;
+    }
+
+    .footer .value {
+      font-size: 11.5px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .build-footer {
+      position: fixed;
+      right: 0.45in;
+      bottom: 0.2in;
+      font-size: 10px;
+      color: var(--muted);
+      text-align: right;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.05rem 0.25rem;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <div>
+        <div class="name">John Doe</div>
+        <div class="headline">AI/LLM Delivery &amp; Governance Leader</div>
+      </div>
+    </div>
+    <div class="meta">
+      <div>Boston, MA</div>
+      <div><a href="mailto:john.doe@example.com">john.doe@example.com</a></div>
+      <div><a href="tel:+1 (555) 010-0200">+1 (555) 010-0200</a></div>
+    </div>
+  </div>
+
+  <div class="top">
+    <div class="card accented">
+      <h3>Executive Summary</h3>
+      
+      <div class="summary">
+          
+          Delivery leader focused on turning AI/LLM capability into auditable, repeatable outcomes through governance, operating models, and disciplined execution.
+          
+      </div>
+      
+
+      <div style="height: 0.45rem;"></div>
+
+      <h3>Core Strengths</h3>
+      <div class="strengths">
+        
+        <div>
+          <div class="bucket-title">AI/ML</div>
+          <div class="bucket-items">LLM workflow design, Prompting &amp; evaluation, Human-in-the-loop patterns, Model risk awareness, NIST AI RMF literacy</div>
+        </div>
+        
+        <div>
+          <div class="bucket-title">Product</div>
+          <div class="bucket-items">Narrative writing, Decision-grade synthesis, Stakeholder alignment, Metrics, Executive packaging</div>
+        </div>
+        
+        <div>
+          <div class="bucket-title">Engineering</div>
+          <div class="bucket-items">Python, YAML-first authoring, Jinja templating, CLI tooling, Git workflows, Markdown-first artifacts</div>
+        </div>
+        
+        <div>
+          <div class="bucket-title">Leadership</div>
+          <div class="bucket-items">Program governance, Operating model design, Change enablement, Delivery discipline, Risk/compliance communication</div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Mapping 'Projects' to 'Signature Proof' -->
+    <div class="card accented">
+      <h3>Signature Proof (Projects)</h3>
+      <table class="wins">
+        <tbody>
+          
+          <tr>
+            <td>
+              <div class="win-title">CVFoundry-Lite</div>
+              
+              <div class="win-impact">Built a self-contained resume generator from canonical YAML + config YAML using Python + Jinja, optimized for portability (single HTML file).</div>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>
+              <div class="win-title">CVFoundry (Concept)</div>
+              
+              <div class="win-impact">Developed a pragmatic approach to “CV as code”: structured data + templates + deterministic builds instead of manual Word/PDF version sprawl.</div>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>
+              <div class="win-title">KOS / TRACE (Concept)</div>
+              
+              <div class="win-impact">Explored a tool-neutral control-plane for Human–AI co-collaboration where thinking becomes durable artifacts.</div>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>
+              <div class="win-title">ResDoc Template + Shared Engines</div>
+              
+              <div class="win-impact">Created a Markdown-first, Git-friendly scaffold for AI-assisted research and decision-support deliverables (TRACE loop + TILETS staging).</div>
+              
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Selected Experience</h3>
+    <table class="exp-table">
+      <colgroup>
+        <col class="col-role" />
+        <col class="col-client" />
+        <col class="col-dates" />
+        <col class="col-impact" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Company</th>
+          <th>Dates</th>
+          <th>Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>
+            <div class="role">AI Transformation &amp; Governance Lead</div>
+          </td>
+          <td class="client">
+            Global Consulting Firm
+          </td>
+          <td class="dates">Oct 2025–Present</td>
+          <td class="impact">
+            
+            Authored an AI strategic plan with a Crawl–Walk–Run maturity model aligned to NIST AI RMF and practical delivery constraints.
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <div class="role">Builder — Intent-to-Artifact Workflows</div>
+          </td>
+          <td class="client">
+            Self-Directed (Open Work)
+          </td>
+          <td class="dates">Oct 2025–Present</td>
+          <td class="impact">
+            
+            Designed and implemented an “Intent Foundry” approach: staged human–AI collaboration that turns ambiguous intent into tempered, traceable, execution-ready artifacts.
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <div class="role">Senior Product Manager</div>
+          </td>
+          <td class="client">
+            Acme Software
+          </td>
+          <td class="dates">Jan 2019–May 2022</td>
+          <td class="impact">
+            
+            Owned roadmap for a workflow automation platform; grew active users 3x and improved retention by 18%.
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <div>
+      <div class="label">Education</div>
+      <div class="value">
+        
+        <div>State University — B.S., Computer Science</div>
+        
+      </div>
+    </div>
+    <div>
+      <div class="label">Certifications</div>
+      <div class="value">
+        
+        <div>Certified Delivery Professional — Professional Services Training (2025)</div>
+        
+        <div>Cloud Architecture (Associate) — Cloud Provider (2021)</div>
+        
+      </div>
+    </div>
+    <div>
+      <div class="label">Interests</div>
+      <div class="value">
+        
+        <div>Writing</div>
+        
+        <div>Teaching</div>
+        
+        <div>Systems thinking</div>
+        
+        <div>AI literacy enablement</div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="build-footer">cvfoundry-lite v0.3.1 — 2026-01-31 (rev 269d8bd361)</div>
+
+</body>
+</html>
