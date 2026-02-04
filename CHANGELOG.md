@@ -4,6 +4,13 @@ All notable changes to CVFoundry-Lite will be documented in this file.
 
 The format is based on Keep a Changelog, and versions follow SemVer.
 
+## [Unreleased]
+
+### Added
+
+- Optional `testimonials` support in canonical YAML (validated and normalized; not rendered in outputs yet).
+- Stable `id` fields for sample `experience` entries to support anchoring testimonials.
+
 ## [0.3.2] - 2026-02-01
 
 ### Changed

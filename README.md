@@ -29,6 +29,21 @@ Core files:
 - `CVFoundry-Lite-Build.py` — build script
 - `CVFoundry-Lite-Jinja.j2` — HTML template
 
+## Testimonials (canonical-only)
+
+`CVFoundry-Lite-Canonical.yml` supports an optional `testimonials` list for short quotes.
+
+Current state:
+
+- Testimonials are stored and validated.
+- They are not rendered in the HTML outputs yet.
+
+Recommended practice:
+
+- Keep quotes 1–2 lines.
+- Use `attribution_public: peer | colleague | client`.
+- Anchor to `experience_ids` when possible.
+
 ## Quickstart
 
 ### 1) Install dependencies
@@ -47,7 +62,7 @@ bash build.sh
 Or (manual):
 
 ```bash
-python CVFoundry-Lite-Build.py
+python3 CVFoundry-Lite-Build.py
 ```
 
 You should see something like:
@@ -94,7 +109,7 @@ AI-enabled editors can be especially helpful for safe refactors across YAML + Ji
 ## CLI options
 
 ```bash
-python CVFoundry-Lite-Build.py \
+python3 CVFoundry-Lite-Build.py \
   --canonical CVFoundry-Lite-Canonical.yml \
   --config CVFoundry-Lite-Config.yml \
   --template CVFoundry-Lite-Jinja.j2 \

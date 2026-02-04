@@ -254,6 +254,76 @@ def _validate_and_normalize(canonical: Any, config: Any) -> tuple[dict, dict]:
         if cat and items:
             skills.append({"category": cat, "items": items})
 
+    experience_ids: set[str] = set()
+    for r in _as_list(canonical.get("experience")):
+        if not isinstance(r, dict):
+            continue
+        rid = str(r.get("id") or "").strip()
+        if not rid:
+            continue
+        if rid in experience_ids:
+            raise ValueError(f"Duplicate experience id: {rid}")
+        experience_ids.add(rid)
+
+    testimonials_raw = canonical.get("testimonials")
+    testimonials: list[dict] = []
+    if testimonials_raw is not None:
+        if not isinstance(testimonials_raw, list):
+            raise ValueError("testimonials must be a list")
+
+        allowed_attribution_public = {"peer", "colleague", "client"}
+        t_ids: set[str] = set()
+        for t in testimonials_raw:
+            if not isinstance(t, dict):
+                raise ValueError("Each testimonial must be a mapping")
+
+            tid = str(t.get("id") or "").strip()
+            quote = str(t.get("quote") or "").strip()
+            attribution_public = str(t.get("attribution_public") or "").strip().lower()
+
+            if not tid:
+                raise ValueError("Testimonial missing required field: id")
+            if tid in t_ids:
+                raise ValueError(f"Duplicate testimonial id: {tid}")
+            t_ids.add(tid)
+
+            if not quote:
+                raise ValueError(f"Testimonial {tid} missing required field: quote")
+            if attribution_public not in allowed_attribution_public:
+                raise ValueError(
+                    f"Testimonial {tid} attribution_public must be one of {sorted(allowed_attribution_public)}"
+                )
+
+            exp_refs = [
+                str(v).strip()
+                for v in (_as_list(t.get("experience_id")) + _as_list(t.get("experience_ids")))
+                if str(v).strip()
+            ]
+            if exp_refs:
+                if not experience_ids:
+                    raise ValueError(
+                        f"Testimonial {tid} references experience ids but no experience entries define an id"
+                    )
+                for exp_id in exp_refs:
+                    if exp_id not in experience_ids:
+                        raise ValueError(f"Testimonial {tid} references unknown experience id: {exp_id}")
+
+            win_refs = [
+                str(v).strip() for v in (_as_list(t.get("win_id")) + _as_list(t.get("win_ids"))) if str(v).strip()
+            ]
+            testimonials.append(
+                {
+                    "id": tid,
+                    "quote": quote,
+                    "attribution_public": attribution_public,
+                    "source_name_private": str(t.get("source_name_private") or "").strip(),
+                    "experience_ids": exp_refs,
+                    "win_ids": win_refs,
+                    "date": str(t.get("date") or "").strip(),
+                    "tags": _as_dict(t.get("tags")),
+                }
+            )
+
     def _norm_entries(entries: Any, required_fields: list[str]) -> list[dict]:
         out: list[dict] = []
         for e in _as_list(entries):
@@ -278,6 +348,7 @@ def _validate_and_normalize(canonical: Any, config: Any) -> tuple[dict, dict]:
         tags = [str(t).strip() for t in _as_list(r.get("tags")) if str(t).strip()]
         experience.append(
             {
+                "id": str(r.get("id") or "").strip(),
                 "company": company,
                 "location": str(r.get("location") or "").strip(),
                 "role": role,
@@ -345,6 +416,7 @@ def _validate_and_normalize(canonical: Any, config: Any) -> tuple[dict, dict]:
         "personal": personal_norm,
         "summary": summary,
         "skills": skills,
+        "testimonials": testimonials,
         "experience": experience,
         "projects": projects,
         "education": education,

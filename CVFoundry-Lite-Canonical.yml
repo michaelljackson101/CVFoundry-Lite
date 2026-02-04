@@ -34,8 +34,17 @@ skills:
   - category: "Leadership"
     items: ["Program governance", "Operating model design", "Change enablement", "Delivery discipline", "Risk/compliance communication"]
 
+testimonials:
+  - id: "testimonial_peer_2026_02_example_001"
+    quote: "Consistently brings clarity, momentum, and calm execution to high-stakes work."
+    attribution_public: peer
+    date: "2026-02-02"
+    experience_ids:
+      - global_consulting_firm_ai_transformation_governance_lead
+
 experience:
-  - company: "Global Consulting Firm"
+  - id: global_consulting_firm_ai_transformation_governance_lead
+    company: "Global Consulting Firm"
     location: "Boston, MA"
     role: "AI Transformation & Governance Lead"
     start_date: "2025-10"
@@ -48,7 +57,8 @@ experience:
       - "Built lightweight CLI automation and folder contracts so outputs were traceable, reproducible, and safe to reuse."
     tags: ["ai", "governance", "human-in-the-loop", "traceability", "windsurf"]
 
-  - company: "Self-Directed (Open Work)"
+  - id: self_directed_open_work_intent_to_artifact_workflows
+    company: "Self-Directed (Open Work)"
     location: "Remote"
     role: "Builder — Intent-to-Artifact Workflows"
     start_date: "2025-10"
@@ -60,7 +70,8 @@ experience:
       - "Practiced a tool-neutral AI co-collaboration model (e.g., Windsurf/Cascade) focused on durable artifacts, not chat transcripts."
     tags: ["intent", "trace", "yaml", "governed-ai", "windsurf"]
 
-  - company: "Acme Software"
+  - id: acme_software_senior_product_manager
+    company: "Acme Software"
     location: "Remote"
     role: "Senior Product Manager"
     start_date: "2019-01"
