@@ -1,0 +1,40 @@
+intent_version: '1.0'
+name: 'Manage-Foundry Clarification Request: Handoff Lifecycle Protocol'
+source: CVFoundry-Lite
+type: process_clarification
+description: |
+  Request clarification on the expected lifecycle protocol for Manage-Foundry handoff
+  artifacts written to handoff/inbox/*.yml.
+
+  Context:
+  - Manage-Foundry created manage_nudge_20260504.yml with tasks[].status: todo.
+  - Remediation was completed (release/version bump + commit + push).
+  - It is unclear how the recipient should signal completion/closure.
+asks:
+  - name: Define closure mechanism
+    details: |
+      Should recipients:
+      1) update tasks[].status in-place (todo -> done/completed),
+      2) move the YAML out of handoff/inbox to a closed/archive folder,
+      3) or both?
+  - name: Define allowed status vocabulary
+    details: |
+      What are the allowed values for tasks[].status (e.g., todo|in_progress|done|blocked)?
+      Are additional fields permitted (e.g., resolved_at, resolution, notes, resolved_by)?
+  - name: Define polling/ingestion behavior
+    details: |
+      Does Manage-Foundry re-scan handoff/inbox for updates, or is the inbox write-once?
+      If it is write-once, what is the expected response channel for closure?
+related:
+  - path: handoff/inbox/manage_nudge_20260504.yml
+    topic: R01-STAGNATION remediation closure
+proposed_convention:
+  tasks_status:
+    todo: Not started
+    in_progress: Actively being remediated
+    done: Remediation complete
+    blocked: Cannot proceed without external dependency
+  optional_fields:
+    resolved_at: ISO date
+    resolved_by: actor identifier
+    resolution: short free-text summary
