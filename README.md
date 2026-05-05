@@ -1,3 +1,7 @@
+---
+consumers: ["agentic-audit"]
+---
+
 # CVFoundry-Lite
 
 CVFoundry-Lite is a tiny, local-first resume generator designed for a modern workflow:

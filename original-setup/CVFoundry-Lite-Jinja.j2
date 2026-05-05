@@ -218,6 +218,22 @@
       font-family: var(--font-mono);
     }
 
+    blockquote {
+      margin: 0;
+      padding: 0;
+    }
+
+    .quote {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .quote-attrib {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
     @media print {
       .page { border: 0; margin: 0; padding: 0; }
       a { color: var(--text); text-decoration: none; }
@@ -279,6 +295,22 @@
               {% endfor %}
             </ul>
           </div>
+        </section>
+      {% endif %}
+
+      {% if testimonials %}
+        <section class="section span-3">
+          <h2>Testimonials</h2>
+          {% for t in testimonials %}
+            {% if t.quote %}
+              <div class="item">
+                <blockquote class="quote">“{{ t.quote | e }}”</blockquote>
+                {% if t.attribution_public %}
+                  <div class="quote-attrib">— {{ t.attribution_public | e }}</div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
         </section>
       {% endif %}
 

@@ -11,10 +11,8 @@ if [ -f "$VENV_DIR/bin/activate" ]; then
   exit 0
 fi
 
-if command -v python >/dev/null 2>&1; then
-  python "$ROOT_DIR/CVFoundry-Lite-Build.py" "$@"
-  exit 0
-fi
+echo "NOTE: virtualenv not found at $VENV_DIR." >&2
+echo "Run: bash bootstrap.sh" >&2
 
 if command -v python3 >/dev/null 2>&1; then
   python3 "$ROOT_DIR/CVFoundry-Lite-Build.py" "$@"

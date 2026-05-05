@@ -1,0 +1,11 @@
+intent_version: '1.0'
+name: 'Manage-Foundry Nudge: CVFoundry-Lite'
+source: Manage-Foundry
+type: technical_debt_remediation
+description: Manage-Foundry detected 1 charter violations during the nightly Active
+  Search.
+tasks:
+- name: Address R01-STAGNATION (MEDIUM)
+  description: Repo has been inactive for over 89 days. Please review and archive
+    if deprecated, or schedule maintenance.
+  status: todo

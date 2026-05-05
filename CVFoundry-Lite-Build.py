@@ -461,11 +461,13 @@ def main() -> None:
 
     data, cfg = _validate_and_normalize(canonical, config)
 
-    build_meta = _build_meta(
-        canonical_path=canonical_path,
-        config_path=config_path,
-        template_path=template_path,
-    )
+    build_meta: Optional[BuildMeta] = None
+    if bool(cfg.get("layout", {}).get("show_footer_build_info")):
+        build_meta = _build_meta(
+            canonical_path=canonical_path,
+            config_path=config_path,
+            template_path=template_path,
+        )
 
     template_parent = str(Path(template_path).parent) if str(Path(template_path).parent) != "." else "."
     env = Environment(loader=FileSystemLoader(template_parent), autoescape=True)
@@ -473,10 +475,21 @@ def main() -> None:
 
     tpl = env.get_template(Path(template_path).name)
 
+    build_meta_payload: Optional[dict[str, str]] = None
+    if build_meta is not None:
+        build_meta_payload = {
+            "product": build_meta.product,
+            "version": build_meta.version,
+            "date": build_meta.date,
+            "hash": build_meta.hash,
+            "hash_short": build_meta.hash_short,
+        }
+
     out_html = tpl.render(
         personal=data["personal"],
         summary=data["summary"],
         skills=data["skills"],
+        testimonials=data["testimonials"],
         experience=data["experience"],
         projects=data["projects"],
         education=data["education"],
@@ -486,13 +499,7 @@ def main() -> None:
         layout=cfg["layout"],
         features=cfg["features"],
         date_format=cfg["date_format"],
-        build_meta={
-            "product": build_meta.product,
-            "version": build_meta.version,
-            "date": build_meta.date,
-            "hash": build_meta.hash,
-            "hash_short": build_meta.hash_short,
-        },
+        build_meta=build_meta_payload,
     )
 
     out_path = Path(args.output) if args.output else Path(_default_output_name(data["personal"]["name"]))
