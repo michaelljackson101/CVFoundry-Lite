@@ -8,4 +8,9 @@ tasks:
 - name: Address R01-STAGNATION (MEDIUM)
   description: Repo has been inactive for over 89 days. Please review and archive
     if deprecated, or schedule maintenance.
-  status: todo
+  status: done
+
+resolution:
+  addressed_at: '2026-05-04'
+  notes: Released CVFoundry-Lite v0.3.3 with maintenance updates (footer toggle respected, testimonials rendered, novice-friendly bootstrap/build scripts) and pushed changes.
+  commit: aefcddd
