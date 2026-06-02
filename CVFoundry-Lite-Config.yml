@@ -31,3 +31,4 @@ features:
   show_certifications: true
   show_interests: true
   show_skill_categories: true
+  show_testimonials: true

@@ -222,6 +222,7 @@ def _validate_and_normalize(canonical: Any, config: Any) -> tuple[dict, dict]:
         "show_skill_categories": bool(
             features.get("show_skill_categories") if "show_skill_categories" in features else True
         ),
+        "show_testimonials": bool(features.get("show_testimonials") if "show_testimonials" in features else True),
     }
 
     # Canonical normalization

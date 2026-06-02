@@ -1,10 +1,13 @@
 ---
+type: tool
+status: active
 consumers: ["agentic-audit"]
 ---
 
 # CVFoundry-Lite
 
-CVFoundry-Lite is a tiny, local-first resume generator designed for a modern workflow:
+CVFoundry-Lite is a tiny, local-first resume generator designed for a modern workflow. It is a member of the **Foundry-Suite**.
+
 
 - **One resume “source of truth”**: `CVFoundry-Lite-Canonical.yml`
 - **One config** (colors, fonts, toggles): `CVFoundry-Lite-Config.yml`
@@ -40,7 +43,7 @@ Core files:
 Current state:
 
 - Testimonials are stored and validated.
-- They are not rendered in the HTML outputs yet.
+- They are rendered in the HTML outputs (configurable via `features.show_testimonials`).
 
 Recommended practice:
 

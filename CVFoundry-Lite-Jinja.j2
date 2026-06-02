@@ -298,7 +298,7 @@
         </section>
       {% endif %}
 
-      {% if testimonials %}
+      {% if features.show_testimonials and testimonials %}
         <section class="section span-3">
           <h2>Testimonials</h2>
           {% for t in testimonials %}
