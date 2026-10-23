@@ -60,15 +60,20 @@ experience:
   - id: self_directed_open_work_intent_to_artifact_workflows
     company: "Self-Directed (Open Work)"
     location: "Remote"
-    role: "Builder — Intent-to-Artifact Workflows"
+    role: "Builder — AI Tooling & Intent-to-Artifact Workflows"
     start_date: "2025-10"
     end_date: "Present"
     highlights:
+      - "Operationalized a multi-tenant AI Governance Pipeline with semantic web crawling and robust PDF/HTML parsing for compliant AI sourcing."
+      - "Architected Import-Foundry and integrated it with Intent-Foundry workflows, translating ambiguous business intent into execution-ready assets through strict human-in-the-loop gating."
+      - "Built Liaison-Foundry NLP Intake, a unified parser automating Fastmail, KDE Connect SMS, and Todoist 'Wave Reports' (audio summaries via Voice-Foundry)."
+      - "Stabilized Voice-Foundry with centralized TTS pronunciation overrides and dictation fixes for high-fidelity technical terminology."
+      - "Matured the Foundry Suite ecosystem by migrating Persona apps to native Linux orchestration, solidifying NetOps port governance, and strengthening PostgreSQL/MCP integrations."
       - "Designed and implemented an “Intent Foundry” approach: staged human–AI collaboration that turns ambiguous intent into tempered, traceable, execution-ready artifacts."
       - "Added recasting (forward intent→outputs and reverse outputs→evidence→inferred intent) to enable validation, auditability, and alternate stakeholder perspectives."
       - "Standardized run packaging so any run can be re-issued as a single executive-ready document driven by run-scoped YAML specifications."
       - "Practiced a tool-neutral AI co-collaboration model (e.g., Windsurf/Cascade) focused on durable artifacts, not chat transcripts."
-    tags: ["intent", "trace", "yaml", "governed-ai", "windsurf"]
+    tags: ["intent", "trace", "yaml", "governed-ai", "windsurf", "nlp", "governance"]
 
   - id: acme_software_senior_product_manager
     company: "Acme Software"

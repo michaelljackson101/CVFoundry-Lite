@@ -1,0 +1,11 @@
+schema_version: 1
+nudge_id: CVFoundry-Lite_20260704132016
+target_repo: CVFoundry-Lite
+violations:
+- id: R04-MISSING-CAPABILITY
+  severity: critical
+  message: Repo is missing a CAPABILITY_REPORT.md. All foundries must declare their
+    purpose.
+resolution: Generated CAPABILITY_REPORT.md to satisfy missing capability requirement.
+status: completed
+resolved_at: '2026-07-04T13:23:55-04:00'

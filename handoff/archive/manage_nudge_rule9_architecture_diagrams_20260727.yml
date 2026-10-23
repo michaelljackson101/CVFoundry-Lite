@@ -1,0 +1,12 @@
+intent_version: '1.0'
+notice_id: 'manage_nudge_rule9_architecture_diagrams_20260727'
+source: 'Manage-Foundry (Chief of Staff)'
+type: 'nudge'
+priority: 'normal'
+title: 'Mandatory Ecosystem Rule 9: ARCHITECTURE_DIAGRAMS.md Standardization'
+summary: |
+  In accordance with Founder Directive WO-20260727-ARCH-DIAGRAMS-001, all Foundry Suite repositories must standardize on a root-level `ARCHITECTURE_DIAGRAMS.md` file for storing visual Mermaid system flow diagrams.
+agent_instructions: |
+  1. Ensure a root-level `ARCHITECTURE_DIAGRAMS.md` (uppercase) file exists in this repository.
+  2. Format entries with header instructions for IDE Markdown Preview (`Ctrl+K V`), timestamped section headers (`## [YYYY-MM-DD] Diagram Title`), narrative descriptions, and fenced `mermaid` code blocks.
+  3. Reference `[ARCHITECTURE_DIAGRAMS.md](file:///path/to/ARCHITECTURE_DIAGRAMS.md)` in chat responses whenever presenting system flow diagrams.

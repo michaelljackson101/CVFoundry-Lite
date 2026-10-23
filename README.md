@@ -1,7 +1,17 @@
 ---
 type: tool
 status: active
-consumers: ["agentic-audit"]
+consumers: ["", "agentic-audit"]
+id: cvfoundry-lite
+name: CVFoundry-Lite
+description: CVFoundry-Lite repository.
+owner: michael
+kind: foundry
+moniker: The Cvfoundry Lite
+tagline: Capability for CVFoundry-Lite.
+tier: Publishing & Delivery
+key_capabilities: []
+tags: []
 ---
 
 # CVFoundry-Lite
